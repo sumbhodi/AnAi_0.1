@@ -1,10 +1,14 @@
 # cs_tutor.py: CS Tutor Minimum Viable Product (MVP)
 
+# NEW: Import Handoff data from the core architecture
+from core import HANDOFF_JSON # <--- THIS IS THE KEY LINE
+
 # This module provides quick, context-aware, scaffolded lessons
 # based on the user's current cognitive state and learning preferences.
 
 # 1. LEARNING PREFERENCE (Define your "teaching style" here)
 # Options: 'Haiku', 'Absurdist Metaphor', 'Cop Drama', 'Ziggurat Scaffolding'
+# We can use the Handoff status to dynamically adjust the style.
 teaching_style = "Ziggurat Scaffolding" 
 
 # 2. THE TUTOR FUNCTION
@@ -12,7 +16,8 @@ def teach_concept(topic, style=teaching_style):
     """Generates a highly compressed, focused lesson."""
 
     # This is the placeholder for the main teaching logic
-    # The real model (Gemini/Claude) would generate the response here.
+    
+    # We can now use HANDOFF_JSON data inside this function if needed!
     
     if topic.lower() == "git" and style == "Ziggurat Scaffolding":
         return "Git is the **History Engine**. Commit is saving. Branch is a **side quest**. Merge is bringing the loot back to the **main timeline**."
@@ -29,6 +34,5 @@ if __name__ == "__main__":
     print(f"CS Tutor Active (Style: {teaching_style}):")
     print(lesson)
 
-    # Example of a concept-check printout:
-    from core import HANDOFF_JSON
+    # The Handoff status check is now built-in:
     print(f"\nConnected to Handoff: Current focus is {HANDOFF_JSON['current_focus']}")
